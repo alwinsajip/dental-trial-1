@@ -14,6 +14,8 @@
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="header-inner">
+
+      <!-- Logo — left -->
       <div class="header-logo">
         <div class="logo-mark">✦</div>
         <div>
@@ -21,8 +23,23 @@
           <div class="clinic-location">Thodupuzha · Idukki · Kerala</div>
         </div>
       </div>
+
+      <!-- Nav — center (desktop only) -->
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="#doctors">Our Team</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <!-- Actions — right -->
       <div class="header-contact">
-        <a href="tel:+914862222051" class="header-phone">📞 04862 222 051</a>
+        <a href="tel:+914862222051" class="header-phone">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          04862 222 051
+        </a>
+        <div class="header-divider"></div>
         <a href="https://wa.me/914862222051?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn-wa-small">WhatsApp</a>
         <div id="authArea">
           <button class="btn-auth" onclick="openModal('loginModal')">Login</button>
@@ -32,6 +49,7 @@
           <button class="btn-auth btn-auth-outline" onclick="logout()">Logout</button>
         </div>
       </div>
+
     </div>
   </header>
 
@@ -39,33 +57,41 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+
       <div class="container">
-        <p class="hero-eyebrow">Est. 1990 · Thodupuzha, Idukki</p>
-        <h1>Excellence in<br /><em>Dental Care</em></h1>
+        <div class="hero-ornament">
+          <span class="hero-eyebrow">Est. 1990 · Thodupuzha, Idukki</span>
+        </div>
+        <h1>
+          Excellence in
+          <em>Dental Care</em>
+        </h1>
         <p class="hero-sub">Three generations of specialist dentists serving Idukki — delivering precise, painless, and lasting results for your whole family.</p>
         <div class="hero-btns">
-          <button class="btn btn-primary" onclick="requireAuthThen()">📅 Book Appointment</button>
-          <a href="tel:+914862222051" class="btn btn-outline">📞 Call Now</a>
+          <button class="btn btn-primary" onclick="requireAuthThen()">&#128197; Book Appointment</button>
+          <a href="tel:+914862222051" class="btn btn-outline">&#128222; Call Now</a>
           <a href="https://wa.me/914862222051?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn btn-wa">WhatsApp</a>
         </div>
+      </div>
 
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-num">30+</div>
-            <div class="stat-label">Years of Care</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">3</div>
-            <div class="stat-label">MDS Specialists</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">9</div>
-            <div class="stat-label">Services</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">5★</div>
-            <div class="stat-label">Patient Reviews</div>
-          </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Years of Care</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-label">MDS Specialists</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">9</div>
+          <div class="stat-label">Services</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5&#9733;</div>
+          <div class="stat-label">Patient Reviews</div>
         </div>
       </div>
     </section>
