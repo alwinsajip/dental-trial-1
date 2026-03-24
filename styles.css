@@ -1,6 +1,6 @@
 /* ============================================================
-   St. Mary's Dental Clinic — Premium Black & Gold Stylesheet
-   Aesthetic: Luxury / High-end clinic. Dark backgrounds, gold
+   St. Mary's Dental Clinic — Premium Blue Black & Gold White Stylesheet
+   Aesthetic: Luxury / High-end clinic. Deep navy backgrounds, blue
    accents, serif display font, refined spacing.
    ============================================================ */
 
@@ -8,22 +8,22 @@
 
 /* ----- Variables ----- */
 :root {
-  --black:       #0d0d0d;
-  --black-soft:  #141414;
-  --black-card:  #1a1a1a;
-  --black-border:#2a2a2a;
-  --gold:        #c9a84c;
-  --gold-light:  #e8cc85;
-  --gold-dark:   #a07930;
-  --gold-tint:   rgba(201,168,76,.08);
-  --gold-tint2:  rgba(201,168,76,.14);
+  --black:       #0a1628;
+  --black-soft:  #0e1e38;
+  --black-card:  #112240;
+  --black-border:#1e3a5f;
+  --gold:        #4a9eff;
+  --gold-light:  #89c4ff;
+  --gold-dark:   #2478d4;
+  --gold-tint:   rgba(74,158,255,.07);
+  --gold-tint2:  rgba(74,158,255,.14);
   --white:       #ffffff;
-  --off-white:   #f5f0e8;
-  --cream:       #faf7f2;
-  --text-light:  #e8e0d0;
-  --text-muted:  #8a8070;
-  --green:       #2a9d5c;
-  --green-dark:  #1e7a44;
+  --off-white:   #f0f6ff;
+  --cream:       #e8f2ff;
+  --text-light:  #d0e4f7;
+  --text-muted:  #7a9cbf;
+  --green:       #1a9e4a;
+  --green-dark:  #157a39;
   --radius:      4px;
   --radius-lg:   10px;
   --max-w:       1100px;
@@ -135,7 +135,7 @@ ul { list-style: none; }
    ============================================================ */
 .site-header {
   background: rgba(10,10,10,.96);
-  border-bottom: 1px solid rgba(201,168,76,.15);
+  border-bottom: 1px solid rgba(74,158,255,.15);
   padding: 0;
   position: sticky;
   top: 0;
@@ -182,7 +182,7 @@ ul { list-style: none; }
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 1px dashed rgba(201,168,76,.25);
+  border: 1px dashed rgba(74,158,255,.25);
 }
 
 .clinic-name {
@@ -268,7 +268,7 @@ ul { list-style: none; }
   font-weight: 700;
   padding: 8px 18px;
   border-radius: 30px;
-  border: 1px solid rgba(201,168,76,.5);
+  border: 1px solid rgba(74,158,255,.5);
   cursor: pointer;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -311,8 +311,8 @@ ul { list-style: none; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(10,10,10,.85) 0%, rgba(10,10,10,.7) 50%, rgba(10,10,10,.92) 100%),
-    url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1600&q=80') center/cover no-repeat;
+    linear-gradient(to bottom, rgba(10,22,40,.88) 0%, rgba(10,22,40,.72) 50%, rgba(10,22,40,.94) 100%),
+    url('https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1600&q=80') center/cover no-repeat;
   z-index: 0;
 }
 
@@ -324,7 +324,7 @@ ul { list-style: none; }
   transform: translateX(-50%);
   width: 900px;
   height: 500px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,.18) 0%, transparent 65%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(74,158,255,.18) 0%, transparent 65%);
   pointer-events: none;
   z-index: 1;
 }
@@ -414,8 +414,8 @@ ul { list-style: none; }
   display: flex;
   justify-content: center;
   margin-top: 80px;
-  border-top: 1px solid rgba(201,168,76,.15);
-  background: rgba(0,0,0,.35);
+  border-top: 1px solid rgba(74,158,255,.15);
+  background: rgba(8,18,36,.45);
   backdrop-filter: blur(8px);
   position: relative;
   z-index: 2;
@@ -426,7 +426,7 @@ ul { list-style: none; }
   max-width: 220px;
   padding: 30px 16px;
   text-align: center;
-  border-right: 1px solid rgba(201,168,76,.1);
+  border-right: 1px solid rgba(74,158,255,.1);
   position: relative;
 }
 .stat-item:last-child { border-right: none; }
@@ -740,7 +740,7 @@ ul { list-style: none; }
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--black-border);
-  filter: grayscale(80%) invert(90%) contrast(90%);
+  filter: grayscale(60%) invert(85%) sepia(20%) hue-rotate(185deg) contrast(88%);
 }
 .contact-map iframe { width: 100%; height: 100%; display: block; }
 
@@ -922,7 +922,7 @@ ul { list-style: none; }
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(201,168,76,.1);
+  box-shadow: 0 0 0 3px rgba(74,158,255,.12);
 }
 
 .form-row { display: flex; gap: 14px; }
