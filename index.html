@@ -1,561 +1,447 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PearlDent — Smile With Confidence</title>
-  <meta name="description" content="PearlDent Dental Clinic — Expert dental care with a gentle touch. Book your appointment today." />
-
-  <!-- Google Fonts: Cormorant Garamond (display) + DM Sans (body) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
-
-  <!-- Phosphor Icons (lightweight icon set) -->
-  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
-
+  <title>St. Mary's Dental Clinic – Thodupuzha, Idukki</title>
+  <meta name="description" content="St. Mary's Dental Clinic, Jyothi Bazar, Thodupuzha. Specialist dental care by Dr. Prof. A.V. Pius, Dr. Asha Pius and Dr. Geo Pius." />
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body>
 
-  <!-- ==================== NAVBAR ==================== -->
-  <header class="navbar" id="navbar">
-    <div class="nav-container">
-
-      <!-- Logo -->
-      <a href="#home" class="nav-logo">
-        <span class="logo-icon">✦</span>
-        <span class="logo-text">Pearl<em>Dent</em></span>
-      </a>
-
-      <!-- Desktop Nav Links -->
-      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#gallery" class="nav-link">Gallery</a>
-        <a href="#doctors" class="nav-link">Doctors</a>
-        <a href="#testimonials" class="nav-link">Testimonials</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-
-      <!-- Right Controls -->
-      <div class="nav-controls">
-        <!-- Dark Mode Toggle -->
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
-          <i class="ph ph-sun" id="themeIconLight"></i>
-          <i class="ph ph-moon" id="themeIconDark"></i>
-        </button>
-        <!-- Hamburger -->
-        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <div class="logo-mark">✦</div>
+        <div>
+          <div class="clinic-name">St. Mary's Dental Clinic</div>
+          <div class="clinic-location">Thodupuzha · Idukki · Kerala</div>
+        </div>
       </div>
-    </div>
-
-    <!-- Mobile Drawer -->
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-      <a href="#home" class="mobile-link">Home</a>
-      <a href="#services" class="mobile-link">Services</a>
-      <a href="#gallery" class="mobile-link">Gallery</a>
-      <a href="#doctors" class="mobile-link">Doctors</a>
-      <a href="#testimonials" class="mobile-link">Testimonials</a>
-      <a href="#contact" class="mobile-link">Contact</a>
-      <div class="mobile-ctas">
-        <a href="tel:+919876543210" class="btn btn-outline-sm">
-          <i class="ph ph-phone"></i> Call Now
-        </a>
-        <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="btn btn-whatsapp-sm">
-          <i class="ph ph-whatsapp-logo"></i> WhatsApp
-        </a>
+      <div class="header-contact">
+        <a href="tel:+914862222051" class="header-phone">📞 04862 222 051</a>
+        <a href="https://wa.me/914862222051?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn-wa-small">WhatsApp</a>
+        <div id="authArea">
+          <button class="btn-auth" onclick="openModal('loginModal')">Login</button>
+        </div>
+        <div id="userArea" style="display:none;" class="user-area">
+          <span id="userGreet" class="user-greet"></span>
+          <button class="btn-auth btn-auth-outline" onclick="logout()">Logout</button>
+        </div>
       </div>
     </div>
   </header>
 
   <main>
 
-    <!-- ==================== HERO ==================== -->
-    <section class="hero" id="home">
-      <div class="hero-bg-shape"></div>
-      <div class="hero-container">
-
-        <div class="hero-content reveal">
-          <span class="hero-eyebrow">Chennai's Trusted Dental Care</span>
-          <h1 class="hero-headline">
-            Your Brightest<br />
-            <em>Smile Starts</em><br />
-            Here
-          </h1>
-          <p class="hero-sub">
-            Gentle, precision dentistry for every age — from routine cleanings to full-smile transformations. Experience care that truly listens.
-          </p>
-          <div class="hero-actions">
-            <a href="tel:+919876543210" class="btn btn-primary">
-              <i class="ph ph-phone-call"></i> Call Now
-            </a>
-            <a href="https://wa.me/919876543210?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn btn-whatsapp">
-              <i class="ph ph-whatsapp-logo"></i> Chat on WhatsApp
-            </a>
-          </div>
-          <div class="hero-stats">
-            <div class="stat">
-              <span class="stat-num">12+</span>
-              <span class="stat-label">Years Experience</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-              <span class="stat-num">4,800+</span>
-              <span class="stat-label">Happy Patients</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-              <span class="stat-num">98%</span>
-              <span class="stat-label">Satisfaction Rate</span>
-            </div>
-          </div>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-eyebrow">Est. 1990 · Thodupuzha, Idukki</p>
+        <h1>Excellence in<br /><em>Dental Care</em></h1>
+        <p class="hero-sub">Three generations of specialist dentists serving Idukki — delivering precise, painless, and lasting results for your whole family.</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="requireAuthThen()">📅 Book Appointment</button>
+          <a href="tel:+914862222051" class="btn btn-outline">📞 Call Now</a>
+          <a href="https://wa.me/914862222051?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn btn-wa">WhatsApp</a>
         </div>
 
-        <div class="hero-visual reveal reveal-delay-1">
-          <div class="hero-img-wrap">
-            <img
-              src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=640&q=80"
-              alt="Smiling patient at PearlDent clinic"
-              loading="eager"
-              class="hero-img"
-            />
-            <div class="hero-badge">
-              <i class="ph ph-seal-check"></i>
-              <span>ISO Certified Clinic</span>
-            </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Years of Care</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">3</div>
+            <div class="stat-label">MDS Specialists</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">9</div>
+            <div class="stat-label">Services</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5★</div>
+            <div class="stat-label">Patient Reviews</div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- ==================== SERVICES ==================== -->
-    <section class="section services" id="services">
+    <!-- ===== DOCTORS ===== -->
+    <section class="section section-alt" id="doctors">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">What We Offer</span>
-          <h2 class="section-title">Expert Care, <em>Every Visit</em></h2>
-          <p class="section-sub">Comprehensive dental services tailored to give you a healthier, more confident smile.</p>
+        <div class="section-header">
+          <p class="section-sub">Our Team</p>
+          <h2 class="section-title">Meet Your Specialists</h2>
+          <div class="gold-rule"></div>
         </div>
+        <div class="doctor-grid">
 
+          <div class="doctor-card">
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80" alt="Dr. Prof. A.V. Pius" class="doctor-photo" loading="lazy" />
+            <div class="doctor-info">
+              <h3>Dr. Prof. A.V. Pius</h3>
+              <p class="doctor-qual">BSc · BDS · MDS — Prosthodontist</p>
+              <p>Senior specialist and professor with decades of experience in crowns, bridges, dentures, full-mouth rehabilitation, and implant prosthetics. Founder of St. Mary's Dental Clinic.</p>
+            </div>
+          </div>
+
+          <div class="doctor-card">
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80" alt="Dr. Asha Pius" class="doctor-photo" loading="lazy" />
+            <div class="doctor-info">
+              <h3>Dr. Asha Pius</h3>
+              <p class="doctor-qual">BDS · MDS — Endodontist</p>
+              <p>Specialist in root canal treatment and endodontics. Uses modern rotary techniques to make every procedure comfortable, precise, and painless.</p>
+            </div>
+          </div>
+
+          <div class="doctor-card">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80" alt="Dr. Geo Pius" class="doctor-photo" loading="lazy" />
+            <div class="doctor-info">
+              <h3>Dr. Geo Pius</h3>
+              <p class="doctor-qual">BDS · MDS — Dental Surgeon &amp; Implantologist</p>
+              <p>Specialist in dental implants and oral surgery. Provides precise, lasting solutions with a focus on patient comfort and quick recovery.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES — Icon Card Grid ===== -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-sub">What We Offer</p>
+          <h2 class="section-title">How Can We Help You Today?</h2>
+          <div class="gold-rule"></div>
+        </div>
         <div class="services-grid">
 
-          <div class="service-card reveal">
-            <div class="service-icon-wrap">
-              <i class="ph ph-tooth"></i>
+          <!-- Check-up -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 8c-6.627 0-12 5.373-12 12 0 4.418 2.386 8.277 5.922 10.368L16 38h8l2.078-7.632C29.614 28.277 32 24.418 32 20c0-6.627-5.373-12-12-12z"/>
+                <circle cx="36" cy="36" r="7"/>
+                <path d="M33 36l2 2 4-4"/>
+              </svg>
             </div>
-            <h3>General Dentistry</h3>
-            <p>Routine check-ups, cleanings, fillings, and preventive care to keep your teeth healthy for life.</p>
+            <h3>General Check-up</h3>
           </div>
 
-          <div class="service-card reveal reveal-delay-1">
-            <div class="service-icon-wrap">
-              <i class="ph ph-sparkle"></i>
+          <!-- Fillings -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 10c-3 0-6 3-6 8 0 3 1 5 2 7l3 13h22l3-13c1-2 2-4 2-7 0-5-3-8-6-8-2 0-4 1-5 2l-5 4-5-4c-1-1-3-2-5-2z"/>
+                <line x1="24" y1="14" x2="24" y2="28"/>
+                <line x1="18" y1="21" x2="30" y2="21"/>
+              </svg>
             </div>
-            <h3>Teeth Whitening</h3>
-            <p>Professional-grade bleaching treatments that safely brighten your smile by several shades in one visit.</p>
+            <h3>Tooth Fillings</h3>
           </div>
 
-          <div class="service-card reveal reveal-delay-2">
-            <div class="service-icon-wrap">
-              <i class="ph ph-align-center-horizontal"></i>
+          <!-- Extraction -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 10c-3 0-6 3-6 8 0 3 1 5 2 7l3 13h22l3-13c1-2 2-4 2-7 0-5-3-8-6-8-2 0-4 1-5 2l-5 4-5-4c-1-1-3-2-5-2z"/>
+                <line x1="18" y1="21" x2="30" y2="21"/>
+              </svg>
             </div>
-            <h3>Orthodontics</h3>
-            <p>Invisible aligners and traditional braces to straighten teeth at any age with minimal disruption.</p>
+            <h3>Tooth Extraction</h3>
           </div>
 
-          <div class="service-card reveal">
-            <div class="service-icon-wrap">
-              <i class="ph ph-crown-simple"></i>
+          <!-- Root Canal -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 10c-3 0-6 3-6 8 0 3 1 5 2 7l3 13h22l3-13c1-2 2-4 2-7 0-5-3-8-6-8-2 0-4 1-5 2l-5 4-5-4c-1-1-3-2-5-2z"/>
+                <path d="M20 22c0 0 0 8 0 10M28 22c0 0 0 6 0 8" stroke-width="1.8"/>
+                <!-- lightning bolt for pain relief -->
+                <path d="M23 6l-3 6h4l-3 6" stroke-width="1.6"/>
+              </svg>
             </div>
-            <h3>Crowns & Bridges</h3>
-            <p>Durable, natural-looking restorations that rebuild damaged or missing teeth with lasting precision.</p>
+            <h3>Root Canal Treatment</h3>
           </div>
 
-          <div class="service-card reveal reveal-delay-1">
-            <div class="service-icon-wrap">
-              <i class="ph ph-number-circle-zero"></i>
+          <!-- Crowns -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 32l4-16 6 8 4-12 4 12 6-8 4 16z"/>
+                <rect x="10" y="32" width="28" height="6" rx="2"/>
+              </svg>
+            </div>
+            <h3>Crowns &amp; Bridges</h3>
+          </div>
+
+          <!-- Implants -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="8" width="8" height="14" rx="4"/>
+                <path d="M22 22l-4 18h12l-4-18"/>
+                <line x1="16" y1="28" x2="32" y2="28"/>
+                <line x1="15" y1="34" x2="33" y2="34"/>
+              </svg>
             </div>
             <h3>Dental Implants</h3>
-            <p>Titanium implants that fuse with the jawbone for a permanent, stable, and beautiful replacement tooth.</p>
           </div>
 
-          <div class="service-card reveal reveal-delay-2">
-            <div class="service-icon-wrap">
-              <i class="ph ph-smiley"></i>
+          <!-- Dentures -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 20c0-6 4-10 8-10s6 3 8 3 4-3 8-3 8 4 8 10c0 8-4 14-10 16h-12C12 34 8 28 8 20z"/>
+                <path d="M8 20h32M16 14v14M24 12v16M32 14v14"/>
+              </svg>
             </div>
-            <h3>Cosmetic Dentistry</h3>
-            <p>Veneers, bonding, and smile makeovers — crafted to create the radiant smile you've always envisioned.</p>
+            <h3>Dentures</h3>
+          </div>
+
+          <!-- Braces -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="19" width="6" height="10" rx="2"/>
+                <rect x="21" y="17" width="6" height="14" rx="2"/>
+                <rect x="32" y="19" width="6" height="10" rx="2"/>
+                <line x1="16" y1="24" x2="21" y2="24"/>
+                <line x1="27" y1="24" x2="32" y2="24"/>
+              </svg>
+            </div>
+            <h3>Braces &amp; Orthodontics</h3>
+          </div>
+
+          <!-- Whitening -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 10c-3 0-6 3-6 8 0 3 1 5 2 7l3 13h22l3-13c1-2 2-4 2-7 0-5-3-8-6-8-2 0-4 1-5 2l-5 4-5-4c-1-1-3-2-5-2z"/>
+                <path d="M30 8l2-3M34 12l3-1M33 17l3 1"/>
+              </svg>
+            </div>
+            <h3>Teeth Whitening</h3>
+          </div>
+
+          <!-- Cleaning -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 10c-3 0-6 3-6 8 0 3 1 5 2 7l3 13h22l3-13c1-2 2-4 2-7 0-5-3-8-6-8-2 0-4 1-5 2l-5 4-5-4c-1-1-3-2-5-2z"/>
+                <path d="M36 8c2 0 4 2 4 4l-12 12" stroke-width="2"/>
+                <circle cx="38" cy="10" r="2" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <h3>Scaling &amp; Cleaning</h3>
+          </div>
+
+          <!-- Emergency -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 10c-3 0-6 3-6 8 0 3 1 5 2 7l3 13h22l3-13c1-2 2-4 2-7 0-5-3-8-6-8-2 0-4 1-5 2l-5 4-5-4c-1-1-3-2-5-2z"/>
+                <path d="M24 16v8M24 28v2" stroke-width="2.4" stroke="var(--gold)"/>
+              </svg>
+            </div>
+            <h3>Emergency Care</h3>
+          </div>
+
+          <!-- Consultation CTA -->
+          <div class="service-card" style="border-color:var(--gold-dark);background:var(--gold-tint);" onclick="requireAuthThen()" style="cursor:pointer;">
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="10" width="32" height="28" rx="4"/>
+                <line x1="16" y1="8" x2="16" y2="14"/>
+                <line x1="32" y1="8" x2="32" y2="14"/>
+                <line x1="8" y1="20" x2="40" y2="20"/>
+                <line x1="24" y1="28" x2="24" y2="34"/>
+                <line x1="20" y1="31" x2="28" y2="31"/>
+              </svg>
+            </div>
+            <h3 style="color:var(--gold);">Book Appointment</h3>
           </div>
 
         </div>
       </div>
     </section>
 
-    <!-- ==================== GALLERY ==================== -->
-    <section class="section gallery-section" id="gallery">
+    <!-- ===== GALLERY ===== -->
+    <section class="section section-alt" id="gallery">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Smile Transformations</span>
-          <h2 class="section-title">Before &amp; <em>After Gallery</em></h2>
-          <p class="section-sub">Real results from real patients. Click any image to view in full detail.</p>
+        <div class="section-header">
+          <p class="section-sub">Inside the Clinic</p>
+          <h2 class="section-title">Our Facilities</h2>
+          <div class="gold-rule"></div>
         </div>
-
         <div class="gallery-grid">
-
-          <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=900&q=85" data-caption="Whitening — 3 shades brighter in a single session">
-            <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=75" alt="Teeth whitening result" loading="lazy" />
-            <div class="gallery-overlay">
-              <i class="ph ph-magnifying-glass-plus"></i>
-              <span>Teeth Whitening</span>
-            </div>
-          </div>
-
-          <div class="gallery-item reveal reveal-delay-1" data-src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=900&q=85" data-caption="Porcelain veneers — complete smile makeover">
-            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=75" alt="Veneer smile makeover" loading="lazy" />
-            <div class="gallery-overlay">
-              <i class="ph ph-magnifying-glass-plus"></i>
-              <span>Porcelain Veneers</span>
-            </div>
-          </div>
-
-          <div class="gallery-item reveal reveal-delay-2" data-src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=900&q=85" data-caption="Dental implant — permanent natural look">
-            <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=600&q=75" alt="Dental implant result" loading="lazy" />
-            <div class="gallery-overlay">
-              <i class="ph ph-magnifying-glass-plus"></i>
-              <span>Dental Implant</span>
-            </div>
-          </div>
-
-          <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1559757175-7cb036e0d465?w=900&q=85" data-caption="Orthodontic treatment — perfectly aligned smile">
-            <img src="https://images.unsplash.com/photo-1559757175-7cb036e0d465?w=600&q=75" alt="Orthodontic result" loading="lazy" />
-            <div class="gallery-overlay">
-              <i class="ph ph-magnifying-glass-plus"></i>
-              <span>Orthodontics</span>
-            </div>
-          </div>
-
-          <div class="gallery-item reveal reveal-delay-1" data-src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=900&q=85" data-caption="Crown restoration — seamless, natural-looking fix">
-            <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=75" alt="Crown restoration" loading="lazy" />
-            <div class="gallery-overlay">
-              <i class="ph ph-magnifying-glass-plus"></i>
-              <span>Crown &amp; Bridge</span>
-            </div>
-          </div>
-
-          <div class="gallery-item reveal reveal-delay-2" data-src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=900&q=85" data-caption="Composite bonding — closing gaps naturally">
-            <img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=600&q=75" alt="Composite bonding" loading="lazy" />
-            <div class="gallery-overlay">
-              <i class="ph ph-magnifying-glass-plus"></i>
-              <span>Composite Bonding</span>
-            </div>
-          </div>
-
+          <div class="gallery-item" tabindex="0" role="button" aria-label="View photo"><img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=600&q=80" alt="Clinic reception" loading="lazy" /></div>
+          <div class="gallery-item" tabindex="0" role="button" aria-label="View photo"><img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80" alt="Dental treatment room" loading="lazy" /></div>
+          <div class="gallery-item" tabindex="0" role="button" aria-label="View photo"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=80" alt="Dental equipment" loading="lazy" /></div>
+          <div class="gallery-item" tabindex="0" role="button" aria-label="View photo"><img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=600&q=80" alt="Dental chair" loading="lazy" /></div>
+          <div class="gallery-item" tabindex="0" role="button" aria-label="View photo"><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=80" alt="Consultation room" loading="lazy" /></div>
+          <div class="gallery-item" tabindex="0" role="button" aria-label="View photo"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80" alt="Happy patient" loading="lazy" /></div>
         </div>
-      </div>
-
-      <!-- Lightbox Modal -->
-      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
-        <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
-          <i class="ph ph-x"></i>
-        </button>
-        <div class="lightbox-content">
-          <img src="" alt="" id="lightboxImg" />
-          <p id="lightboxCaption"></p>
-        </div>
-        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">
-          <i class="ph ph-caret-left"></i>
-        </button>
-        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
-          <i class="ph ph-caret-right"></i>
-        </button>
-      </div>
-    </section>
-
-    <!-- ==================== DOCTORS ==================== -->
-    <section class="section doctors-section" id="doctors">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Meet the Team</span>
-          <h2 class="section-title">Your <em>Trusted Doctors</em></h2>
-          <p class="section-sub">Board-certified specialists who combine clinical excellence with genuine compassion.</p>
-        </div>
-
-        <div class="doctors-grid">
-
-          <div class="doctor-card reveal">
-            <div class="doctor-img-wrap">
-              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80" alt="Dr. Anika Sharma" loading="lazy" />
-            </div>
-            <div class="doctor-body">
-              <h3 class="doctor-name">Dr. Anika Sharma</h3>
-              <span class="doctor-spec">Lead Cosmetic Dentist</span>
-              <p class="doctor-bio">With over 14 years of practice, Dr. Sharma specialises in full-mouth smile makeovers and minimally invasive cosmetic procedures.</p>
-              <div class="doctor-credentials">
-                <span class="credential"><i class="ph ph-graduation-cap"></i> BDS, AIIMS Delhi</span>
-                <span class="credential"><i class="ph ph-medal"></i> MDS Prosthodontics</span>
-                <span class="credential"><i class="ph ph-certificate"></i> FAGE Fellowship</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="doctor-card reveal reveal-delay-1">
-            <div class="doctor-img-wrap">
-              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80" alt="Dr. Rajan Mehta" loading="lazy" />
-            </div>
-            <div class="doctor-body">
-              <h3 class="doctor-name">Dr. Rajan Mehta</h3>
-              <span class="doctor-spec">Orthodontist & Implantologist</span>
-              <p class="doctor-bio">Dr. Mehta brings precision and artistry to every smile alignment, with over 2,000 successful implant placements to his credit.</p>
-              <div class="doctor-credentials">
-                <span class="credential"><i class="ph ph-graduation-cap"></i> BDS, KMC Manipal</span>
-                <span class="credential"><i class="ph ph-medal"></i> MDS Orthodontics</span>
-                <span class="credential"><i class="ph ph-certificate"></i> ITI Scholar</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="doctor-card reveal reveal-delay-2">
-            <div class="doctor-img-wrap">
-              <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&q=80" alt="Dr. Priya Venkat" loading="lazy" />
-            </div>
-            <div class="doctor-body">
-              <h3 class="doctor-name">Dr. Priya Venkat</h3>
-              <span class="doctor-spec">Paediatric & Family Dentist</span>
-              <p class="doctor-bio">Dr. Priya creates a warm, anxiety-free environment for children and adults alike, focusing on preventive care and patient education.</p>
-              <div class="doctor-credentials">
-                <span class="credential"><i class="ph ph-graduation-cap"></i> BDS, SRM Chennai</span>
-                <span class="credential"><i class="ph ph-medal"></i> MDS Pedodontics</span>
-                <span class="credential"><i class="ph ph-certificate"></i> ADA Member</span>
-              </div>
-            </div>
-          </div>
-
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+          <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+          <img src="" alt="" id="lbImg" />
         </div>
       </div>
     </section>
 
-    <!-- ==================== TESTIMONIALS ==================== -->
-    <section class="section testimonials-section" id="testimonials">
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section" id="testimonials">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Patient Stories</span>
-          <h2 class="section-title">What Our <em>Patients Say</em></h2>
+        <div class="section-header">
+          <p class="section-sub">Patient Stories</p>
+          <h2 class="section-title">What Our Patients Say</h2>
+          <div class="gold-rule"></div>
         </div>
-
-        <div class="testimonials-track-wrap">
-          <div class="testimonials-track" id="testimonialsTrack">
-
-            <div class="testimonial-card">
-              <div class="stars">★★★★★</div>
-              <blockquote>"I was terrified of dentists, but Dr. Sharma made me feel completely at ease. My veneers look absolutely natural — I smile in every photo now!"</blockquote>
-              <div class="testimonial-author">
-                <div class="author-avatar" style="background:#b2dfdb;">S</div>
-                <div>
-                  <strong>Sunita Krishnan</strong>
-                  <span>Veneers Patient, 2024</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="stars">★★★★★</div>
-              <blockquote>"PearlDent gave me my smile back after years of ignoring my teeth. The implant feels just like a real tooth — zero pain, stunning result."</blockquote>
-              <div class="testimonial-author">
-                <div class="author-avatar" style="background:#b3e5fc;">A</div>
-                <div>
-                  <strong>Arjun Nair</strong>
-                  <span>Implant Patient, 2024</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="stars">★★★★★</div>
-              <blockquote>"My daughter was scared of every dentist visit until Dr. Priya. Now she actually looks forward to her check-ups. The team is incredibly patient."</blockquote>
-              <div class="testimonial-author">
-                <div class="author-avatar" style="background:#f8bbd0;">M</div>
-                <div>
-                  <strong>Meena Subramaniam</strong>
-                  <span>Parent, Paediatric Care 2023</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="stars">★★★★★</div>
-              <blockquote>"The whitening session was painless and fast. I walked out three shades brighter. The clinic is spotless and the staff is so warm and professional."</blockquote>
-              <div class="testimonial-author">
-                <div class="author-avatar" style="background:#dcedc8;">R</div>
-                <div>
-                  <strong>Rohan Pillai</strong>
-                  <span>Whitening Patient, 2024</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="stars">★★★★★</div>
-              <blockquote>"Dr. Mehta's invisible aligners changed my life. 14 months of treatment, seamless experience. I can't stop recommending PearlDent to everyone I know!"</blockquote>
-              <div class="testimonial-author">
-                <div class="author-avatar" style="background:#ffe0b2;">D</div>
-                <div>
-                  <strong>Divya Chandran</strong>
-                  <span>Orthodontic Patient, 2023</span>
-                </div>
-              </div>
-            </div>
-
+        <div class="testimonials-grid">
+          <div class="review-card">
+            <p class="review-stars">★★★★★</p>
+            <p class="review-text">"Dr. Prof. Pius did my full-mouth rehabilitation and the results are beyond what I hoped for. After years of problems I finally have proper teeth again. Very grateful."</p>
+            <p class="review-author">— Santhosh Varghese, Thodupuzha</p>
           </div>
-
-          <div class="testimonials-nav">
-            <button class="t-nav-btn" id="tPrev" aria-label="Previous testimonial"><i class="ph ph-caret-left"></i></button>
-            <div class="t-dots" id="tDots"></div>
-            <button class="t-nav-btn" id="tNext" aria-label="Next testimonial"><i class="ph ph-caret-right"></i></button>
+          <div class="review-card">
+            <p class="review-stars">★★★★★</p>
+            <p class="review-text">"I was always scared of root canals but Dr. Asha Pius was so patient and gentle. Completely painless. The whole clinic has a very calm and professional atmosphere."</p>
+            <p class="review-author">— Mary Thankachan, Koothattukulam</p>
+          </div>
+          <div class="review-card">
+            <p class="review-stars">★★★★★</p>
+            <p class="review-text">"Got my implant done by Dr. Geo Pius. Healing was fast and it feels just like a real tooth. Our whole family comes here now. Best dental clinic in Idukki."</p>
+            <p class="review-author">— Anil Kumar, Moolamattom</p>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- ==================== CONTACT ==================== -->
-    <section class="section contact-section" id="contact">
+    <!-- ===== CONTACT ===== -->
+    <section class="section section-alt" id="contact">
       <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Get In Touch</span>
-          <h2 class="section-title">We're <em>Here For You</em></h2>
-          <p class="section-sub">Book an appointment, ask a question, or simply say hello.</p>
+        <div class="section-header">
+          <p class="section-sub">Get in Touch</p>
+          <h2 class="section-title">Find Us</h2>
+          <div class="gold-rule"></div>
         </div>
-
         <div class="contact-grid">
-
-          <div class="contact-info reveal">
-            <div class="contact-item">
-              <div class="contact-icon"><i class="ph ph-map-pin"></i></div>
-              <div>
-                <strong>Address</strong>
-                <p>42, Anna Salai, Nungambakkam,<br />Chennai, Tamil Nadu 600 006</p>
-              </div>
+          <div class="contact-details">
+            <div class="contact-row">
+              <span class="contact-label">Address</span>
+              <span>Jyothi Bazar, First Floor,<br />Thodupuzha, Idukki — 685 584<br />Kerala, India</span>
             </div>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="ph ph-phone"></i></div>
-              <div>
-                <strong>Phone</strong>
-                <p><a href="tel:+919876543210">+91 98765 43210</a></p>
-              </div>
+            <div class="contact-row">
+              <span class="contact-label">Phone</span>
+              <span><a href="tel:+914862222051">04862 222 051</a></span>
             </div>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="ph ph-envelope"></i></div>
-              <div>
-                <strong>Email</strong>
-                <p><a href="mailto:hello@pearldent.in">hello@pearldent.in</a></p>
-              </div>
+            <div class="contact-row">
+              <span class="contact-label">WhatsApp</span>
+              <span><a href="https://wa.me/914862222051" target="_blank" rel="noopener">+91 48622 22051</a></span>
             </div>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="ph ph-clock"></i></div>
-              <div>
-                <strong>Hours</strong>
-                <p>Mon – Sat: 9:00 AM – 7:00 PM<br />Sunday: 10:00 AM – 2:00 PM</p>
-              </div>
+            <div class="contact-row">
+              <span class="contact-label">Hours</span>
+              <span>Mon – Sat &nbsp;9:00 AM – 7:00 PM<br />Sunday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By appointment only</span>
             </div>
-
-            <div class="contact-ctas">
-              <a href="tel:+919876543210" class="btn btn-primary">
-                <i class="ph ph-phone-call"></i> Call Now
-              </a>
-              <a href="https://wa.me/919876543210?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PearlDent." target="_blank" rel="noopener" class="btn btn-whatsapp">
-                <i class="ph ph-whatsapp-logo"></i> WhatsApp Us
-              </a>
+            <div class="contact-btns">
+              <button class="btn btn-primary" onclick="requireAuthThen()">📅 Book Appointment</button>
+              <a href="tel:+914862222051" class="btn btn-outline">📞 Call</a>
+              <a href="https://wa.me/914862222051?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20St.%20Mary%27s%20Dental%20Clinic." target="_blank" rel="noopener" class="btn btn-wa">WhatsApp</a>
             </div>
           </div>
-
-          <div class="contact-map reveal reveal-delay-1">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.5780744048433!2d80.2415!3d13.0604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAzJzM3LjQiTiA4MMKwMTQnMjkuNCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="PearlDent Clinic Location on Google Maps"
-            ></iframe>
+          <div class="contact-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31458.04!2d76.7172!3d9.8965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07c34ed1cc09b5%3A0xe9b14cd4ea8d1f22!2sThodupuzha%2C%20Kerala%20685584!5e0!3m2!1sen!2sin!4v1700000000001!5m2!1sen!2sin"
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              title="St. Mary's Dental Clinic location"></iframe>
           </div>
-
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="footer">
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
     <div class="container">
-      <div class="footer-grid">
-
-        <div class="footer-brand">
-          <a href="#home" class="nav-logo">
-            <span class="logo-icon">✦</span>
-            <span class="logo-text">Pearl<em>Dent</em></span>
-          </a>
-          <p>Gentle, precise dental care — because every smile tells a story worth protecting.</p>
-          <div class="social-links">
-            <a href="#" aria-label="Facebook" class="social-icon"><i class="ph ph-facebook-logo"></i></a>
-            <a href="#" aria-label="Instagram" class="social-icon"><i class="ph ph-instagram-logo"></i></a>
-            <a href="#" aria-label="YouTube" class="social-icon"><i class="ph ph-youtube-logo"></i></a>
-            <a href="https://wa.me/919876543210" aria-label="WhatsApp" class="social-icon" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo"></i></a>
-          </div>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">St. Mary's Dental Clinic</div>
+          <div>Jyothi Bazar, Thodupuzha<br />Idukki — 685 584, Kerala</div>
         </div>
-
-        <div class="footer-col">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#doctors">Doctors</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
+        <div>
+          <a href="tel:+914862222051">04862 222 051</a><br />
+          <a href="https://wa.me/914862222051" target="_blank" rel="noopener">WhatsApp</a>
         </div>
-
-        <div class="footer-col">
-          <h4>Services</h4>
-          <ul>
-            <li><a href="#services">General Dentistry</a></li>
-            <li><a href="#services">Teeth Whitening</a></li>
-            <li><a href="#services">Orthodontics</a></li>
-            <li><a href="#services">Dental Implants</a></li>
-            <li><a href="#services">Crowns &amp; Bridges</a></li>
-            <li><a href="#services">Cosmetic Dentistry</a></li>
-          </ul>
+        <div>
+          Mon – Sat: 9 AM – 7 PM<br />
+          Sunday: By appointment
         </div>
-
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <ul class="footer-contact-list">
-            <li><i class="ph ph-map-pin"></i> 42, Anna Salai, Chennai 600 006</li>
-            <li><i class="ph ph-phone"></i> <a href="tel:+919876543210">+91 98765 43210</a></li>
-            <li><i class="ph ph-envelope"></i> <a href="mailto:hello@pearldent.in">hello@pearldent.in</a></li>
-          </ul>
-        </div>
-
       </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2025 PearlDent Dental Clinic. All rights reserved.</p>
-        <p>Designed with <i class="ph ph-heart"></i> for healthier smiles.</p>
-      </div>
+      <p class="footer-copy">&copy; 2025 St. Mary's Dental Clinic, Thodupuzha. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Scroll-to-top button -->
-  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-    <i class="ph ph-arrow-up"></i>
-  </button>
+  <!-- ===== MODAL OVERLAY ===== -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+
+    <!-- LOGIN -->
+    <div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <button class="modal-close" onclick="closeAllModals()" aria-label="Close">✕</button>
+      <h2 class="modal-title" id="loginTitle">Patient Login</h2>
+      <p class="modal-sub">Welcome back. Login to book appointments.</p>
+      <div id="loginError" class="form-error" style="display:none;"></div>
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-primary btn-full" onclick="doLogin()">Login</button>
+      <p class="modal-switch">Don't have an account? <a href="#" onclick="switchModal('loginModal','registerModal')">Register here</a></p>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="modal" id="registerModal" role="dialog" aria-modal="true" aria-labelledby="registerTitle" style="display:none;">
+      <button class="modal-close" onclick="closeAllModals()" aria-label="Close">✕</button>
+      <h2 class="modal-title" id="registerTitle">Create Account</h2>
+      <p class="modal-sub">Register as a patient to book appointments online.</p>
+      <div id="registerError" class="form-error" style="display:none;"></div>
+      <div class="form-group">
+        <label for="regName">Full Name</label>
+        <input type="text" id="regName" placeholder="Your full name" autocomplete="name" />
+      </div>
+      <div class="form-group">
+        <label for="regPhone">Phone Number</label>
+        <input type="tel" id="regPhone" placeholder="+91 98765 43210" autocomplete="tel" />
+      </div>
+      <div class="form-group">
+        <label for="regEmail">Email</label>
+        <input type="email" id="regEmail" placeholder="your@email.com" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" placeholder="Min. 6 characters" autocomplete="new-password" />
+      </div>
+      <button class="btn btn-primary btn-full" onclick="doRegister()">Create Account</button>
+      <p class="modal-switch">Already registered? <a href="#" onclick="switchModal('registerModal','loginModal')">Login here</a></p>
+    </div>
+
+    <!-- APPOINTMENT — Calendly -->
+    <div class="modal modal-calendly" id="appointmentModal" role="dialog" aria-modal="true" aria-labelledby="apptTitle" style="display:none;">
+      <button class="modal-close" onclick="closeAllModals()" aria-label="Close">✕</button>
+      <h2 class="modal-title" id="apptTitle">📅 Book an Appointment</h2>
+      <p class="modal-sub" id="apptSub"></p>
+      <div id="calendlyContainer"></div>
+    </div>
+
+  </div>
 
   <script src="script.js"></script>
 </body>

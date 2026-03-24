@@ -1,410 +1,312 @@
-/**
- * PearlDent — Dental Clinic Website
- * script.js — All interactive behaviour
- *
- * Features:
- *  - Dark/Light mode toggle with localStorage persistence
- *  - Sticky navbar with scroll detection
- *  - Mobile hamburger menu
- *  - Scroll reveal (Intersection Observer)
- *  - Active nav link tracking
- *  - Gallery lightbox (keyboard + click navigation)
- *  - Testimonials slider
- *  - Scroll-to-top button
- */
-
 /* ============================================================
-   1. THEME TOGGLE
+   St. Mary's Dental Clinic — script.js
+   Features:
+   1. Clinic photo lightbox
+   2. Smooth scroll for anchor links
+   3. User authentication (register / login / logout)
+   4. Appointment booking via Calendly (with name/email prefill)
    ============================================================ */
-(function initTheme() {
-  const root    = document.documentElement;
-  const btn     = document.getElementById('themeToggle');
-  const STORAGE = 'pd-theme';
 
-  // Apply stored preference immediately (before paint)
-  const saved = localStorage.getItem(STORAGE);
-  if (saved) root.setAttribute('data-theme', saved);
-
-  btn.addEventListener('click', () => {
-    const current = root.getAttribute('data-theme') || 'light';
-    const next    = current === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem(STORAGE, next);
-  });
-})();
+var CALENDLY_URL = 'https://calendly.com/stmaryshospital';
 
 
-/* ============================================================
-   2. STICKY NAVBAR
-   ============================================================ */
-(function initNavbar() {
-  const navbar = document.getElementById('navbar');
+/* ---- 1. PHOTO LIGHTBOX ---- */
+(function () {
+  var lightbox = document.getElementById('lightbox');
+  var lbImg    = document.getElementById('lbImg');
+  var lbClose  = document.getElementById('lbClose');
 
-  const onScroll = () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 30);
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // initial call
-})();
-
-
-/* ============================================================
-   3. HAMBURGER MENU
-   ============================================================ */
-(function initMobileMenu() {
-  const hamburger  = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
-
-  const toggle = (open) => {
-    hamburger.classList.toggle('open', open);
-    mobileMenu.classList.toggle('open', open);
-    hamburger.setAttribute('aria-expanded', String(open));
-    mobileMenu.setAttribute('aria-hidden', String(!open));
-  };
-
-  hamburger.addEventListener('click', () => {
-    const isOpen = hamburger.classList.contains('open');
-    toggle(!isOpen);
+  document.querySelectorAll('.gallery-item').forEach(function (item) {
+    item.addEventListener('click', function () {
+      var img = item.querySelector('img');
+      lbImg.src = img.src.replace('w=500', 'w=900');
+      lbImg.alt = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    });
+    item.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
+    });
   });
 
-  // Close when a link is clicked
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => toggle(false));
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
   });
 
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-      toggle(false);
-    }
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') toggle(false);
-  });
-})();
-
-
-/* ============================================================
-   4. SCROLL REVEAL  (Intersection Observer)
-   ============================================================ */
-(function initScrollReveal() {
-  const elements = document.querySelectorAll('.reveal');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // fire once only
-        }
-      });
-    },
-    {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px',
-    }
-  );
-
-  elements.forEach(el => observer.observe(el));
-})();
-
-
-/* ============================================================
-   5. ACTIVE NAV LINK (Scroll spy)
-   ============================================================ */
-(function initScrollSpy() {
-  const sections  = document.querySelectorAll('section[id]');
-  const navLinks  = document.querySelectorAll('.nav-link');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-          });
-        }
-      });
-    },
-    {
-      rootMargin: '-40% 0px -55% 0px',
-      threshold: 0,
-    }
-  );
-
-  sections.forEach(s => observer.observe(s));
-})();
-
-
-/* ============================================================
-   6. GALLERY LIGHTBOX
-   ============================================================ */
-(function initLightbox() {
-  const galleryItems  = Array.from(document.querySelectorAll('.gallery-item'));
-  const lightbox      = document.getElementById('lightbox');
-  const lightboxImg   = document.getElementById('lightboxImg');
-  const lightboxCap   = document.getElementById('lightboxCaption');
-  const closeBtn      = document.getElementById('lightboxClose');
-  const prevBtn       = document.getElementById('lightboxPrev');
-  const nextBtn       = document.getElementById('lightboxNext');
-
-  let currentIndex = 0;
-
-  const open = (index) => {
-    currentIndex = index;
-    const item   = galleryItems[index];
-    lightboxImg.src = item.dataset.src || item.querySelector('img').src;
-    lightboxImg.alt = item.querySelector('img').alt || '';
-    lightboxCap.textContent = item.dataset.caption || '';
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    closeBtn.focus();
-  };
-
-  const close = () => {
-    lightbox.classList.remove('active');
+  function closeLightbox() {
+    lightbox.classList.remove('open');
     document.body.style.overflow = '';
-    lightboxImg.src = '';
-  };
-
-  const navigate = (dir) => {
-    currentIndex = (currentIndex + dir + galleryItems.length) % galleryItems.length;
-    // Brief fade between images
-    lightboxImg.style.opacity = '0';
-    setTimeout(() => {
-      const item = galleryItems[currentIndex];
-      lightboxImg.src = item.dataset.src || item.querySelector('img').src;
-      lightboxCap.textContent = item.dataset.caption || '';
-      lightboxImg.style.opacity = '1';
-    }, 150);
-  };
-
-  // Smooth image transition
-  lightboxImg.style.transition = 'opacity .2s ease';
-
-  // Open on click
-  galleryItems.forEach((item, i) => {
-    item.addEventListener('click', () => open(i));
-    item.setAttribute('tabindex', '0');
-    item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
-    });
-  });
-
-  closeBtn.addEventListener('click', close);
-  prevBtn.addEventListener('click', () => navigate(-1));
-  nextBtn.addEventListener('click', () => navigate(1));
-
-  // Close on backdrop click
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) close();
-  });
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('active')) return;
-    if (e.key === 'Escape')       close();
-    if (e.key === 'ArrowLeft')    navigate(-1);
-    if (e.key === 'ArrowRight')   navigate(1);
-  });
-
-  // Swipe support (touch)
-  let touchStartX = 0;
-  lightbox.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].clientX;
-  }, { passive: true });
-
-  lightbox.addEventListener('touchend', (e) => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 50) navigate(dx > 0 ? -1 : 1);
-  }, { passive: true });
-})();
-
-
-/* ============================================================
-   7. TESTIMONIALS SLIDER
-   ============================================================ */
-(function initTestimonialsSlider() {
-  const track  = document.getElementById('testimonialsTrack');
-  const cards  = Array.from(track.querySelectorAll('.testimonial-card'));
-  const dotsEl = document.getElementById('tDots');
-  const prevBtn = document.getElementById('tPrev');
-  const nextBtn = document.getElementById('tNext');
-
-  if (!track || cards.length === 0) return;
-
-  // Determine how many cards are visible per "page"
-  const getVisible = () => {
-    if (window.innerWidth <= 600) return 1;
-    if (window.innerWidth <= 960) return 2;
-    return 3;
-  };
-
-  let current  = 0;
-  let visible  = getVisible();
-  let totalPages = Math.ceil(cards.length / visible);
-
-  // Create dots
-  const buildDots = () => {
-    dotsEl.innerHTML = '';
-    totalPages = Math.ceil(cards.length / visible);
-    for (let i = 0; i < totalPages; i++) {
-      const dot = document.createElement('button');
-      dot.className = 't-dot' + (i === current ? ' active' : '');
-      dot.setAttribute('aria-label', `Go to page ${i + 1}`);
-      dot.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(dot);
-    }
-  };
-
-  const goTo = (page) => {
-    current = Math.max(0, Math.min(page, totalPages - 1));
-    const cardW = cards[0].offsetWidth + 24; // gap = 24px
-    track.style.transform = `translateX(-${current * visible * cardW}px)`;
-    track.style.transition = 'transform .45s cubic-bezier(.4,0,.2,1)';
-    document.querySelectorAll('.t-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === current);
-    });
-  };
-
-  const next = () => goTo((current + 1) % totalPages);
-  const prev = () => goTo((current - 1 + totalPages) % totalPages);
-
-  prevBtn.addEventListener('click', prev);
-  nextBtn.addEventListener('click', next);
-
-  // Keyboard
-  document.addEventListener('keydown', (e) => {
-    const section = document.getElementById('testimonials');
-    const rect    = section?.getBoundingClientRect();
-    const inView  = rect && rect.top < window.innerHeight && rect.bottom > 0;
-    if (!inView) return;
-    if (e.key === 'ArrowLeft')  prev();
-    if (e.key === 'ArrowRight') next();
-  });
-
-  // Auto-play
-  let autoplay = setInterval(next, 5000);
-
-  track.parentElement.addEventListener('mouseenter', () => clearInterval(autoplay));
-  track.parentElement.addEventListener('mouseleave', () => {
-    autoplay = setInterval(next, 5000);
-  });
-
-  // Touch swipe
-  let swipeStart = 0;
-  track.addEventListener('touchstart', (e) => {
-    swipeStart = e.changedTouches[0].clientX;
-  }, { passive: true });
-
-  track.addEventListener('touchend', (e) => {
-    const dx = e.changedTouches[0].clientX - swipeStart;
-    if (Math.abs(dx) > 50) dx > 0 ? prev() : next();
-  }, { passive: true });
-
-  // Recalculate on resize
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      const newVisible = getVisible();
-      if (newVisible !== visible) {
-        visible = newVisible;
-        current = 0;
-        buildDots();
-        goTo(0);
-      }
-    }, 200);
-  });
-
-  // Init
-  buildDots();
-  goTo(0);
-})();
-
-
-/* ============================================================
-   8. SCROLL-TO-TOP BUTTON
-   ============================================================ */
-(function initScrollTop() {
-  const btn = document.getElementById('scrollTop');
-
-  window.addEventListener('scroll', () => {
-    btn.classList.toggle('visible', window.scrollY > 600);
-  }, { passive: true });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-})();
-
-
-/* ============================================================
-   9. SMOOTH SCROLL FOR ALL ANCHOR LINKS
-      (fallback for browsers that ignore CSS scroll-behavior
-       inside overflow:hidden containers)
-   ============================================================ */
-(function initSmoothScroll() {
-  const NAV_OFFSET = 76; // px — accounts for sticky navbar height
-
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const target = document.querySelector(link.getAttribute('href'));
-      if (!target) return;
-      e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
-  });
-})();
-
-
-/* ============================================================
-   10. BUTTON RIPPLE EFFECT (micro-interaction)
-   ============================================================ */
-(function initRipple() {
-  document.querySelectorAll('.btn').forEach(btn => {
-    btn.style.position  = 'relative';
-    btn.style.overflow  = 'hidden';
-
-    btn.addEventListener('click', function (e) {
-      const circle   = document.createElement('span');
-      const diameter = Math.max(btn.clientWidth, btn.clientHeight);
-      const radius   = diameter / 2;
-      const rect     = btn.getBoundingClientRect();
-
-      Object.assign(circle.style, {
-        width:       `${diameter}px`,
-        height:      `${diameter}px`,
-        left:        `${e.clientX - rect.left - radius}px`,
-        top:         `${e.clientY - rect.top  - radius}px`,
-        position:    'absolute',
-        borderRadius: '50%',
-        background:  'rgba(255,255,255,0.3)',
-        transform:   'scale(0)',
-        animation:   'pd-ripple .55s linear',
-        pointerEvents: 'none',
-      });
-
-      btn.appendChild(circle);
-      circle.addEventListener('animationend', () => circle.remove());
-    });
-  });
-
-  // Inject keyframes once
-  if (!document.getElementById('pd-ripple-style')) {
-    const style = document.createElement('style');
-    style.id = 'pd-ripple-style';
-    style.textContent = `
-      @keyframes pd-ripple {
-        to { transform: scale(4); opacity: 0; }
-      }
-    `;
-    document.head.appendChild(style);
   }
 })();
+
+
+/* ---- 2. SMOOTH SCROLL ---- */
+(function () {
+  var HEADER_H = 70;
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - HEADER_H, behavior: 'smooth' });
+    });
+  });
+})();
+
+
+/* ============================================================
+   3. AUTHENTICATION — localStorage-based
+   Users:   smdc_users   → { email: { name, phone, passwordHash } }
+   Session: smdc_session → email string
+   ============================================================ */
+
+function simpleHash(str) {
+  var h = 0;
+  for (var i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
+  return h.toString(16);
+}
+
+function getUsers()        { return JSON.parse(localStorage.getItem('smdc_users') || '{}'); }
+function saveUsers(u)      { localStorage.setItem('smdc_users', JSON.stringify(u)); }
+function getSession()      { return localStorage.getItem('smdc_session') || null; }
+function setSession(email) { localStorage.setItem('smdc_session', email); }
+function clearSession()    { localStorage.removeItem('smdc_session'); }
+
+function getCurrentUser() {
+  var email = getSession();
+  if (!email) return null;
+  var u = getUsers()[email];
+  return u ? Object.assign({ email: email }, u) : null;
+}
+
+function refreshAuthUI() {
+  var user = getCurrentUser();
+  document.getElementById('authArea').style.display  = user ? 'none'  : 'block';
+  document.getElementById('userArea').style.display  = user ? 'flex'  : 'none';
+  if (user) document.getElementById('userGreet').textContent = 'Hi, ' + user.name.split(' ')[0];
+}
+
+function doRegister() {
+  clearFormError('registerError');
+  var name  = document.getElementById('regName').value.trim();
+  var phone = document.getElementById('regPhone').value.trim();
+  var email = document.getElementById('regEmail').value.trim().toLowerCase();
+  var pass  = document.getElementById('regPassword').value;
+
+  if (!name)                     return showFormError('registerError', 'Please enter your full name.');
+  if (!phone)                    return showFormError('registerError', 'Please enter your phone number.');
+  if (!email || !email.includes('@')) return showFormError('registerError', 'Please enter a valid email address.');
+  if (pass.length < 6)           return showFormError('registerError', 'Password must be at least 6 characters.');
+
+  var users = getUsers();
+  if (users[email]) return showFormError('registerError', 'An account with this email already exists. Please login.');
+
+  users[email] = { name: name, phone: phone, passwordHash: simpleHash(pass) };
+  saveUsers(users);
+  setSession(email);
+  refreshAuthUI();
+  closeAllModals();
+  showToast('Account created! Welcome, ' + name.split(' ')[0] + ' 👋');
+  checkPendingCalendly();
+}
+
+function doLogin() {
+  clearFormError('loginError');
+  var email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  var pass  = document.getElementById('loginPassword').value;
+
+  if (!email || !email.includes('@')) return showFormError('loginError', 'Please enter a valid email address.');
+  if (!pass)                          return showFormError('loginError', 'Please enter your password.');
+
+  var users = getUsers();
+  var user  = users[email];
+  if (!user || user.passwordHash !== simpleHash(pass))
+    return showFormError('loginError', 'Incorrect email or password. Please try again.');
+
+  setSession(email);
+  refreshAuthUI();
+  closeAllModals();
+  showToast('Welcome back, ' + user.name.split(' ')[0] + '! 👋');
+  checkPendingCalendly();
+}
+
+function logout() {
+  clearSession();
+  refreshAuthUI();
+  showToast('You have been logged out.');
+}
+
+/* After login/register, open Calendly if that was the intent */
+function checkPendingCalendly() {
+  if (window._pendingCalendly) {
+    window._pendingCalendly = false;
+    setTimeout(openCalendlyModal, 150);
+  }
+}
+
+
+/* ============================================================
+   4. CALENDLY INTEGRATION
+   Opens the appointment modal and renders the Calendly inline
+   widget, pre-filled with the logged-in user's name & email.
+   ============================================================ */
+
+function requireAuthThen() {
+  if (getCurrentUser()) {
+    openCalendlyModal();
+  } else {
+    window._pendingCalendly = true;
+    openModal('loginModal');
+  }
+}
+
+function openCalendlyModal() {
+  var user = getCurrentUser();
+  if (!user) return;
+
+  // Show the modal
+  document.getElementById('modalOverlay').classList.add('open');
+  document.querySelectorAll('.modal').forEach(function (m) { m.style.display = 'none'; });
+  var modal = document.getElementById('appointmentModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  // Label
+  document.getElementById('apptSub').textContent = 'Booking for: ' + user.name + ' (' + user.email + ')';
+
+  // Build Calendly URL with prefill query params
+  var params = new URLSearchParams({
+    name:  user.name,
+    email: user.email,
+    hide_gdpr_banner: '1'
+  });
+  var embedURL = CALENDLY_URL + '?' + params.toString();
+
+  var container = document.getElementById('calendlyContainer');
+  container.innerHTML = '';
+
+  // Compute explicit pixel height: modal height minus header elements
+  function getContainerHeight() {
+    var modalH  = modal.getBoundingClientRect().height;
+    var closeH  = (modal.querySelector('.modal-close').offsetHeight || 32) + 14;
+    var titleH  = (document.getElementById('apptTitle').offsetHeight || 30);
+    var subH    = (document.getElementById('apptSub').offsetHeight || 20);
+    var padding = 64; // top + bottom padding + gaps
+    return Math.max(500, modalH - closeH - titleH - subH - padding);
+  }
+
+  function applyHeight(h) {
+    container.style.height    = h + 'px';
+    container.style.minHeight = h + 'px';
+    // Also force any Calendly-injected wrapper and iframe
+    var inner  = container.firstElementChild;
+    var iframe = container.querySelector('iframe');
+    if (inner)  { inner.style.height  = h + 'px'; inner.style.minHeight  = h + 'px'; }
+    if (iframe) { iframe.style.height = h + 'px'; iframe.style.minHeight = h + 'px'; }
+  }
+
+  function renderWidget() {
+    var h = getContainerHeight();
+    container.style.height    = h + 'px';
+    container.style.minHeight = h + 'px';
+
+    if (window.Calendly && window.Calendly.initInlineWidget) {
+      window.Calendly.initInlineWidget({
+        url: embedURL,
+        parentElement: container,
+        prefill: { name: user.name, email: user.email }
+      });
+      // Give Calendly time to inject its wrapper + iframe, then force heights
+      setTimeout(function () { applyHeight(getContainerHeight()); }, 500);
+      setTimeout(function () { applyHeight(getContainerHeight()); }, 1500);
+    } else {
+      // Fallback: plain iframe
+      var iframe = document.createElement('iframe');
+      iframe.src = embedURL;
+      iframe.style.cssText = 'width:100%;height:' + h + 'px;min-height:' + h + 'px;border:none;display:block;';
+      iframe.title = 'Book an appointment';
+      container.appendChild(iframe);
+    }
+  }
+
+  // Small delay so modal has painted and has real dimensions
+  setTimeout(renderWidget, window.Calendly ? 60 : 900);
+}
+
+
+/* ============================================================
+   MODAL HELPERS
+   ============================================================ */
+
+function openModal(id) {
+  document.getElementById('modalOverlay').classList.add('open');
+  document.querySelectorAll('.modal').forEach(function (m) { m.style.display = 'none'; });
+  document.getElementById(id).style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAllModals() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.querySelectorAll('.modal').forEach(function (m) { m.style.display = 'none'; });
+  document.body.style.overflow = '';
+  // Clear the Calendly widget so it re-initialises fresh next time
+  var c = document.getElementById('calendlyContainer');
+  if (c) c.innerHTML = '';
+}
+
+function switchModal(from, to) {
+  document.getElementById(from).style.display = 'none';
+  document.getElementById(to).style.display = 'block';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeAllModals();
+}
+
+
+/* ============================================================
+   FORM HELPERS
+   ============================================================ */
+function showFormError(id, msg) {
+  var el = document.getElementById(id);
+  el.style.display = 'block';
+  el.textContent = msg;
+}
+function clearFormError(id) {
+  var el = document.getElementById(id);
+  el.style.display = 'none';
+  el.textContent = '';
+}
+
+
+/* ============================================================
+   TOAST NOTIFICATION
+   ============================================================ */
+function showToast(msg) {
+  var old = document.getElementById('smdcToast');
+  if (old) old.remove();
+  var t = document.createElement('div');
+  t.id = 'smdcToast';
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(function () { t.classList.add('toast-in'); });
+  setTimeout(function () {
+    t.classList.remove('toast-in');
+    setTimeout(function () { t.remove(); }, 400);
+  }, 3200);
+}
+
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', function () {
+  refreshAuthUI();
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAllModals();
+  });
+});
